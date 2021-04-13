@@ -1,4 +1,4 @@
-# MY FAVORITE QUOTE
+# MY FAVORITE QUOTES
 
 This is a collection of my favorite `Financial` and `Life` quotes.
 
@@ -20,28 +20,27 @@ This is a collection of my favorite `Financial` and `Life` quotes.
     b) go run main.go
     ```
 
-    OR
+### OR
 
-    1. Clone the repo
+1. Clone the repo
 
-        ```bash
-        git clone https://github.com/chigaji/myfavquotes.git
+    ```bash
+    git clone https://github.com/chigaji/myfavquotes.git
+    ```
 
-        ```
+2. Move into the folder
 
-    2. Move into the folder
+    ```bash
+    cd myfavquotes
+    ```
 
-        ```bash
-        cd myfavquotes
-        ```
+3. Run the code
 
-    3. Run the code
+    ```golang
+    go run main.go
+    ```
 
-        ```golang
-        go run main.go
-        ```
-
-3. ### Enter Input (choice for financial quotes or life quotes)
+* Enter Input (`1` for financial quotes or `2` for life quotes.)
 
 ## Licence
 
