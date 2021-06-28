@@ -7,7 +7,7 @@ import (
 
 func Quotes() string {
 	quotes := []string{
-		"Income alone can never make you rich.",
+		"Income alone can never make you wealthy.",
 		"Money can't solve all your problems, but neither can poverty",
 		"Opportunity is missed my most people because it is dressed in overalls and looks like work.",
 		"It is not the man who has too little, but the man who craves more, that is poor.",
