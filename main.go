@@ -33,6 +33,6 @@ func main() {
 	// 	fmt.Println("")
 	// }
 
-	api.RunServer()
+	api.RunDB()
 
 }
