@@ -1,8 +1,6 @@
 package db
 
 import (
-	"fmt"
-
 	"github.com/chigaji/myfavquotes/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -10,26 +8,41 @@ import (
 
 func checkError(err error) {
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 }
 
-func CreateBD() {
+func SetUpDB() *gorm.DB {
 
-	db, _ := gorm.Open("sqlite3", "./sqlitedb.db")
+	db, err := gorm.Open("sqlite3", "./sqlitedb.db")
 
-	db.AutoMigrate(&model.FinancialQuotes{})
+	checkError(err)
+
+	db.LogMode(true)
+
+	// db.AutoMigrate(&model.FinancialQuotes{})
 
 	// fq1 := model.FinancialQuotes{ID: 1, Quote: "Money is never enough"}
 
 	// db.Create(&fq1)
 
-	var q model.FinancialQuotes
+	// var q model.FinancialQuotes
 
-	db.First(&q)
+	// db.First(&q)
 
+	// create tables
+
+	if !db.HasTable(&model.FinancialQuotes{}) {
+		db.CreateTable(&model.FinancialQuotes{})
+	}
+
+	if !db.HasTable(&model.LifeQuotes{}) {
+		db.CreateTable(&model.LifeQuotes{})
+	}
+	if !db.HasTable(&model.LoveQuotes{}) {
+		db.CreateTable(&model.LoveQuotes{})
+	}
 	defer db.Close()
 
-	fmt.Println(q.ID, ":", q.Quote)
-
+	return db
 }
