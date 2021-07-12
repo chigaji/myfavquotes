@@ -7,12 +7,9 @@ import (
 
 func RunServer() {
 	r := gin.Default()
-	r.GET("/", handleHome)
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "You are home",
-		})
-	})
+	api := r.Group("/api")
+	api.GET("/", handleHome)
+	api.GET("/createQuote", createQuote)
 	r.Run(":4000")
 
 }
