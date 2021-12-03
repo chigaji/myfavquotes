@@ -11,7 +11,7 @@ func Quotes() string {
 		"Money can't solve all your problems, but neither can poverty",
 		"Opportunity is missed my most people because it is dressed in overalls and looks like work.",
 		"It is not the man who has too little, but the man who craves more, that is poor.",
-		"By when everyone else is selling and hold untill everyone else is selling. It's the essences of successfull investing.",
+		"Buy when everyone else is selling and hold untill everyone else is selling. It's the essences of successfull investing.",
 		"Money is a terrible Master but an Excellent servant.",
 		"You must gain control over your Money or the lack of it will forever control you.",
 		"Everytime you borrow money, you are robbing your future self.",
