@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/chigaji/myfavquotes/api"
 )
 
@@ -33,6 +35,8 @@ func main() {
 	// 	fmt.Println("")
 	// }
 
-	api.RunDB()
+	fmt.Println("Starting...")
+	// api.RunDB()
+	api.RunServer()
 
 }
