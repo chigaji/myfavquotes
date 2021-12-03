@@ -17,32 +17,13 @@ func SetUpDB() *gorm.DB {
 	db, err := gorm.Open("sqlite3", "./sqlitedb.db")
 
 	checkError(err)
+	// defer db.Close()
 
 	db.LogMode(true)
 
-	// db.AutoMigrate(&model.FinancialQuotes{})
-
-	// fq1 := model.FinancialQuotes{ID: 1, Quote: "Money is never enough"}
-
-	// db.Create(&fq1)
-
-	// var q model.FinancialQuotes
-
-	// db.First(&q)
-
-	// create tables
-
-	if !db.HasTable(&model.FinancialQuotes{}) {
-		db.CreateTable(&model.FinancialQuotes{})
-	}
-
-	if !db.HasTable(&model.LifeQuotes{}) {
-		db.CreateTable(&model.LifeQuotes{})
-	}
-	if !db.HasTable(&model.LoveQuotes{}) {
-		db.CreateTable(&model.LoveQuotes{})
-	}
-	defer db.Close()
+	db.AutoMigrate(&model.FinancialQuotes{})
+	db.AutoMigrate(&model.LifeQuotes{})
+	db.AutoMigrate(&model.LoveQuotes{})
 
 	return db
 }
