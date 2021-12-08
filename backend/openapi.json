@@ -1,0 +1,1288 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "BIGSTER NFT REST API ROUTES",
+    "description": "A Blockchain RESTful API that enables users to MINT, SELL, BUY, TRANSFER, RENT, DOWNLOAD and QUERY NFTs.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Ronald",
+      "url": "http://bigster.co.kr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    },
+    {
+      "url": "https://127.0.0.1:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Home",
+      "description": "Home page"
+    },
+    {
+      "name": "User",
+      "description": "사용자 업무"
+    },
+    {
+      "name": "Blockchain",
+      "description": "블록 체인 관련 업무"
+    },
+    {
+      "name": "NFT",
+      "description": "NFT 관련 업무"
+    }
+  ],
+  "paths": {
+    "/api/v1/home": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Home page",
+        "operationId": "homePage",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/v1/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "사용자 등록",
+        "operationId": "register",
+        "requestBody": {
+          "description": "사용자 등록",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "사용자 로그인 ",
+        "operationId": "login",
+        "requestBody": {
+          "description": "사용자 로그인",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{userId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "등록된 사용자/nft 소유자 정보 확인  ",
+        "operationId": "getUserInfo",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{userId}/deposit": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "deposit money/point to account",
+        "operationId": "deposit",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "deposite to account",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deposit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Edit user's info",
+        "operationId": "editUser",
+        "requestBody": {
+          "description": "update user's info",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/channels": {
+      "get": {
+        "tags": [
+          "Blockchain"
+        ],
+        "summary": "채널 확인 ",
+        "operationId": "channels",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/channels/{channelId}": {
+      "get": {
+        "tags": [
+          "Blockchain"
+        ],
+        "summary": "채널 상세 정보 확인",
+        "operationId": "channelinfo",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "channel id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/chaincodes": {
+      "get": {
+        "tags": [
+          "Blockchain"
+        ],
+        "summary": "블록체인에 설치된 스마트컨트랙트 확인",
+        "operationId": "getInstalledChaincodes",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/channels/{channelId}/chaincodes": {
+      "get": {
+        "tags": [
+          "Blockchain"
+        ],
+        "summary": "특정 채널에서 실행 중인 스마트컨트랙트 확인",
+        "operationId": "getInstChaincodes",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "channel id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/channels/{channelId}/blocks/{number}": {
+      "get": {
+        "tags": [
+          "Blockchain"
+        ],
+        "summary": "블록 번호로 블록 정보 확인",
+        "operationId": "getBlockByNumber",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "channel id ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "description": "Block number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "현재 블록체인에 있는 모든 NFT 확인하기",
+        "operationId": "getAllNfts",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/mint": {
+      "post": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "mint nft",
+        "operationId": "mint",
+        "requestBody": {
+          "description": "mint an nft",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/mintNft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/{nftId}": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "NFT Meta-data 확인하기",
+        "operationId": "getNft",
+        "parameters": [
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/buy": {
+      "post": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "buy nft",
+        "operationId": "buyNft",
+        "requestBody": {
+          "description": "buy an NFT",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/buyNft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/rent": {
+      "post": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "rent NFT",
+        "operationId": "rentNft",
+        "requestBody": {
+          "description": "rent an NFT",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/rentNft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/rent/{renterId}/{nftId}": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "get info about nft rented by user",
+        "operationId": "getRentNft",
+        "parameters": [
+          {
+            "name": "renterId",
+            "in": "path",
+            "description": "renter id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/pawn": {
+      "post": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "pawn NFT",
+        "operationId": "pawnNft",
+        "requestBody": {
+          "description": "pawn an NFT",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pawnNft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/pawn/{pawnerId}/{nftId}": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "query pawned nft details",
+        "operationId": "getPawnedNft",
+        "parameters": [
+          {
+            "name": "pawnerId",
+            "in": "path",
+            "description": "pawner id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/{nftId}/verify": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "NFT 진위 확인",
+        "operationId": "verifyNft",
+        "parameters": [
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/{nftId}/transfer": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "NFT 소유권 이전하기",
+        "operationId": "changeOnwership",
+        "parameters": [
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/{nftId}/history": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "NFT 이력 확인",
+        "operationId": "getNftHistory",
+        "parameters": [
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/nfts/{nftId}/download": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "summary": "NFT 다운로드하기",
+        "operationId": "downloadNft",
+        "parameters": [
+          {
+            "name": "nftId",
+            "in": "path",
+            "description": "nft id ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "UnAuthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "register": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "superminter@yahoo.com",
+          "name": "superminter@yahoo.com",
+          "password": "superminter@yahoo.com"
+        }
+      },
+      "updateUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "superminter@yahoo.com",
+          "name": "superminter@yahoo.com",
+          "password": "superminter@yahoo.com"
+        }
+      },
+      "mintNft": {
+        "type": "object",
+        "properties": {
+          "nftId": {
+            "type": "string"
+          },
+          "nftName": {
+            "type": "string"
+          },
+          "nftHash": {
+            "type": "string"
+          },
+          "nftCreator": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "canBeSold": {
+            "type": "string"
+          },
+          "canBeRented": {
+            "type": "string"
+          },
+          "canBePawned": {
+            "type": "string"
+          },
+          "createdTimestamp": {
+            "type": "string"
+          },
+          "editionName": {
+            "type": "string"
+          },
+          "editionLimit": {
+            "type": "string"
+          },
+          "singleOrMultipleCreators": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "nftId": "35accc78-2199-4154-bb94-ca182eea044f",
+          "nftName": "Stars Wars Toy1",
+          "nftHash": "#02513332222199-4154-bb94-ca182eea044f",
+          "nftCreator": "chigaji@gmail.com",
+          "price": "250000",
+          "canBeSold": "yes",
+          "canBeRented": "yes",
+          "canBePawned": "yes",
+          "createdTimestamp": "2021-05-27T08:25:52.523Z",
+          "editionName": "VIP Edition",
+          "editionLimit": "2",
+          "singleOrMultipleCreators": "S"
+        }
+      },
+      "buyNft": {
+        "type": "object",
+        "properties": {
+          "nftId": {
+            "type": "string"
+          },
+          "buyerId": {
+            "type": "string"
+          },
+          "nftOwner": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "nftId": "35accc78-2199-4154-bb94-ca182eea044f",
+          "buyerId": "buyer1@yahoo.com",
+          "nftOwner": "superminter@yahoo.com",
+          "amount": 10000
+        }
+      },
+      "rentNft": {
+        "type": "object",
+        "properties": {
+          "renterId": {
+            "type": "string"
+          },
+          "nftId": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "renterId": "Mark@gmail.com",
+          "nftId": "35accc78-2199-4154-bb94-ca182eea044f",
+          "startDate": "2021-08-09T04:28:42.112Z",
+          "endDate": "2021-08-09T04:28:42.112Z",
+          "amount": 50000
+        }
+      },
+      "pawnNft": {
+        "type": "object",
+        "properties": {
+          "pawnerId": {
+            "type": "string"
+          },
+          "creditorId": {
+            "type": "string"
+          },
+          "nftId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "renterId": "chigaji@gmail.com",
+          "creditorId": "Mark@gmail.com",
+          "nftId": "35accc78-2199-4154-bb94-ca182eea044f",
+          "amount": 50000,
+          "date": "2021-08-09T04:28:42.112Z"
+        }
+      },
+      "deposit": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "userId": "chigaji@gmail.com",
+          "amount": 50000
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "superminter@yahoo.com",
+          "password": "superminter@yahoo.com"
+        }
+      },
+      "getAssetUser": {
+        "type": "object",
+        "properties": {
+          "fn": {
+            "type": "string"
+          },
+          "emailAddres": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "fn": "readUser",
+          "emailAddres": "superminter@yahoo.com"
+        }
+      },
+      "readAsset": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "assetId": "35accc78-2199-4154-bb94-ca182eea044f"
+        }
+      },
+      "verifyAsset": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "assetId": "35accc78-2199-4154-bb94-ca182eea044f"
+        }
+      },
+      "changeAssetOwnership": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "newAssetOwner": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "assetId": "35accc78-2199-4154-bb94-ca182eea044f",
+          "newAssetOwner": "chigaji@gmail.com"
+        }
+      },
+      "getHistoryForAsset": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "assetId": "35accc78-2199-4154-bb94-ca182eea044f"
+        }
+      },
+      "downloadAsset": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "assetId": "35accc78-2199-4154-bb94-ca182eea044f"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
