@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -30,13 +31,19 @@ func RunServer() {
 	api.GET("/quotes/:type", getQuotes)
 
 	// get a random quote of a given type
-	api.GET("/quote/:type/", getQuote)
+	api.GET("/quote/:type/", getRandomQuote)
+
+	// get a quote of given type by id
+	api.GET("/quote/:type/:id", getQuote)
 
 	// create a quote of a given type
 	api.POST("/quotes/:type", createQuote)
 
 	// edit a given quote of a type using a given id
-	api.PUT("/quotes/:type/:id")
+	api.PUT("/quotes/:type/:id", editQuote)
+
+	// Delete a quote of a given type by Id
+	api.DELETE("/quotes/:type/:id", deleteQuote)
 
 	r.NoRoute(func(c *gin.Context) {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -46,42 +53,50 @@ func RunServer() {
 
 }
 
-// func getQuote(c *gin.Context) {
-// 	fmt.Println("Get quotes called....")
-// 	quoteType := c.Param("type")
-// 	id := c.Param("id")
-
-// 	db := getDbCOnn()
-// 	defer db.Close()
-
-// 	// switch requet quotetype
-// 	switch strings.ToLower(quoteType) {
-// 	case "finance":
-// 		var quote model.FinancialQuotes
-// 		// SELECT * FROM financial_quote WHERE id = 1;
-// 		err := db.First(&quote, id).Error
-// 		checkError(err, c)
-// 		c.JSON(200, quote)
-
-// 	case "love":
-// 		var quote model.LoveQuotes
-// 		err := db.First(&quote, id).Error
-// 		checkError(err, c)
-// 		c.JSON(200, quote)
-
-// 	case "life":
-// 		var quote model.LifeQuotes
-// 		err := db.First(&quote, id).Error
-// 		checkError(err, c)
-// 		c.JSON(200, quote)
-// 	default:
-// 		c.JSON(http.StatusBadRequest, gin.H{"message": "Unknown quote type"})
-// 	}
-
-// }
-
 func getQuote(c *gin.Context) {
 	fmt.Println("Get quote called....")
+	quoteType := c.Param("type")
+
+	id := c.Param("id")
+
+	db := getDbCOnn()
+	defer db.Close()
+
+	// switch requet quotetype
+	switch strings.ToLower(quoteType) {
+	case "finance":
+		var quote model.FinancialQuotes
+		err := db.First(&quote, id).Error
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quote)
+		}
+
+	case "love":
+		var quote model.LoveQuotes
+		err := db.First(&quote, id).Error
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quote)
+		}
+	case "life":
+		var quote model.LifeQuotes
+		err := db.First(&quote, id).Error
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quote)
+		}
+	default:
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Unknown quote type"})
+	}
+	// quote := "Money can't solve all your problems, but neither can poverty"
+
+}
+func getRandomQuote(c *gin.Context) {
+	fmt.Println("Get Random quote called....")
 	quoteType := c.Param("type")
 
 	db := getDbCOnn()
@@ -92,30 +107,35 @@ func getQuote(c *gin.Context) {
 	case "finance":
 		var quotes []model.FinancialQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-
-		rand.Seed(time.Now().UnixNano()) //initial a random generator
-
-		c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			rand.Seed(time.Now().UnixNano()) //initial a random generator
+			c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		}
 
 	case "love":
 		var quotes []model.LoveQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-		rand.Seed(time.Now().UnixNano()) //initial a random generator
-		c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			rand.Seed(time.Now().UnixNano()) //initial a random generator
+			c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		}
 
 	case "life":
 		var quotes []model.LifeQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-		rand.Seed(time.Now().UnixNano()) //initial a random generator
-		c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			rand.Seed(time.Now().UnixNano()) //initial a random generator
+			c.JSON(200, quotes[rand.Intn(len((quotes)))])
+		}
 	default:
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Unknown quote type"})
 	}
-	// quote := "Money can't solve all your problems, but neither can poverty"
-
 }
 
 func getQuotes(c *gin.Context) {
@@ -130,20 +150,29 @@ func getQuotes(c *gin.Context) {
 	case "finance":
 		var quotes []model.FinancialQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-		c.JSON(200, quotes)
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quotes)
+		}
 
 	case "love":
 		var quotes []model.LoveQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-		c.JSON(200, quotes)
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quotes)
+		}
 
 	case "life":
 		var quotes []model.LifeQuotes
 		err := db.Find(&quotes).Error
-		checkError(err, c)
-		c.JSON(200, quotes)
+		if err != nil {
+			notFoundError(err, c)
+		} else {
+			c.JSON(200, quotes)
+		}
 	default:
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Unknown quote type"})
 	}
@@ -181,9 +210,13 @@ func createQuote(c *gin.Context) {
 
 		//insert financial quote to the db
 		err = db.Create(&financialQuote).Error
-		checkError(err, c)
 
-		c.JSON(201, gin.H{"success": financialQuote})
+		if err != nil {
+			checkError(err, c)
+		} else {
+
+			c.JSON(201, gin.H{"success": financialQuote})
+		}
 
 	case "love":
 		loveQuote := model.LoveQuotes{}
@@ -192,10 +225,11 @@ func createQuote(c *gin.Context) {
 
 		//insert love quote to the db
 		err = db.Create(&loveQuote).Error
-		checkError(err, c)
-
-		c.JSON(201, gin.H{"success": loveQuote})
-
+		if err != nil {
+			checkError(err, c)
+		} else {
+			c.JSON(201, gin.H{"success": loveQuote})
+		}
 	case "life":
 		lifeQuote := model.LifeQuotes{}
 		err := json.Unmarshal(quote, &lifeQuote)
@@ -203,22 +237,208 @@ func createQuote(c *gin.Context) {
 
 		//insert love quote to the db
 		err = db.Create(&lifeQuote).Error
-		checkError(err, c)
+		if err != nil {
+			checkError(err, c)
+		} else {
+			c.JSON(201, gin.H{"success": lifeQuote})
+		}
+	default:
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid quote Type"})
+	}
+}
 
-		c.JSON(201, gin.H{"success": lifeQuote})
+/*
+* edit quote
+ */
+func editQuote(c *gin.Context) {
+
+	db := getDbCOnn()
+
+	defer db.Close()
+
+	//get quote type (financial, love, or life quote)
+	quoteType := c.Param("type")
+
+	// get quote id
+	id := c.Param("id")
+
+	println("got quote type: ", quoteType)
+	// db.Prepa
+	// quote := "Money can't solve all your problems, but neither can poverty"
+	// quote, err := ioutil.ReadAll(c.Request.Body)
+	// notFoundError(err, c)
+
+	// switch requet quotetype
+	switch strings.ToLower(quoteType) {
+	case "finance":
+		financialQuote := model.FinancialQuotes{}
+
+		// SELECT * FROM financial_quote WHERE id = 1;
+		db.First(&financialQuote, id)
+
+		if financialQuote.Quote != "" {
+			println(financialQuote.ID)
+			if financialQuote.ID != 0 {
+				var newQuote model.FinancialQuotes
+				c.Bind(&newQuote)
+				println(newQuote.Quote, newQuote.ID)
+				result := model.FinancialQuotes{
+					ID:    financialQuote.ID,
+					Quote: newQuote.Quote,
+				}
+				db.Save(&result)
+
+				c.JSON(200, gin.H{"success": result})
+			} else {
+				c.JSON(404, gin.H{"error": "quote with Id: " + id + "not Found"})
+			}
+		} else {
+			c.JSON(422, gin.H{"error": "fields are empty"})
+		}
+
+	case "love":
+		loveQuote := model.LoveQuotes{}
+
+		// SELECT * FROM love_quotes WHERE id = 1;
+		db.First(&loveQuote, id)
+
+		if loveQuote.Quote != "" {
+
+			if loveQuote.ID != 0 {
+				var newQuote model.LoveQuotes
+				c.Bind(&newQuote)
+
+				result := model.LoveQuotes{
+					ID:    loveQuote.ID,
+					Quote: newQuote.Quote,
+				}
+				db.Save(&result)
+
+				c.JSON(200, gin.H{"success": result})
+			} else {
+				c.JSON(404, gin.H{"error": "quote of type " + quoteType + " with Id: " + id + "not Found"})
+			}
+		} else {
+			c.JSON(422, gin.H{"error": "fields are empty"})
+		}
+
+	case "life":
+		lifeQuote := model.LifeQuotes{}
+
+		// SELECT * FROM love_quotes WHERE id = 1;
+		db.First(&lifeQuote, id)
+		if lifeQuote.Quote != "" {
+
+			if lifeQuote.ID != 0 {
+				var newQuote model.LifeQuotes
+				c.Bind(&newQuote)
+
+				result := model.LifeQuotes{
+					ID:    lifeQuote.ID,
+					Quote: newQuote.Quote,
+				}
+				db.Save(&result)
+
+				c.JSON(200, gin.H{"success": result})
+			} else {
+				c.JSON(404, gin.H{"error": "quote of type " + quoteType + " with Id: " + id + "not Found"})
+			}
+		} else {
+			c.JSON(422, gin.H{"error": "fields are empty"})
+		}
 
 	default:
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid quote Type"})
 	}
 }
+
+/*
+* Delete quote of type using id
+ */
+func deleteQuote(c *gin.Context) {
+
+	db := getDbCOnn()
+
+	defer db.Close()
+
+	//get quote type (financial, love, or life quote)
+	quoteType := c.Param("type")
+
+	// get quote id
+	id := c.Param("id")
+
+	println("got quote type: ", quoteType)
+
+	// switch requet quotetype
+	switch strings.ToLower(quoteType) {
+	case "finance":
+		financialQuote := model.FinancialQuotes{}
+
+		// SELECT * FROM financial_quote WHERE id = 1;
+		db.First(&financialQuote, id)
+
+		if financialQuote.ID != 0 {
+			// DELETE FROM financial_quote WHERE id = finanancial_quote.id
+			db.Delete(&financialQuote)
+			println("quote =>", financialQuote.Quote)
+
+			c.JSON(200, gin.H{"success": quoteType + " quote with Id: " + id + " deleted"})
+		} else {
+			c.JSON(404, gin.H{"error": quoteType + " quote with Id: " + id + "not found"})
+		}
+
+	case "love":
+		loveQuote := model.LoveQuotes{}
+
+		// SELECT * FROM love_quotes WHERE id = 1;
+		db.First(&loveQuote, id)
+
+		if loveQuote.ID != 0 {
+			db.Delete(&loveQuote)
+
+			println("quote =>", loveQuote.Quote)
+
+			c.JSON(200, gin.H{"success": quoteType + " quote with Id: " + id + " deleted"})
+		} else {
+			c.JSON(404, gin.H{"error": quoteType + " quote with Id: " + id + "not found"})
+		}
+
+	case "life":
+		lifeQuote := model.LifeQuotes{}
+
+		// SELECT * FROM love_quotes WHERE id = 1;
+		db.First(&lifeQuote, id)
+
+		if lifeQuote.ID != 0 {
+
+			db.Delete(&lifeQuote)
+
+			println("quote =>", lifeQuote.Quote)
+
+			c.JSON(200, gin.H{"success": quoteType + " quote with Id: " + id + " deleted"})
+		} else {
+			c.JSON(404, gin.H{"error": quoteType + " quote with Id: " + id + "not found"})
+		}
+
+	default:
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid quote Type"})
+	}
+}
+
 func getDbCOnn() *gorm.DB {
 	db := db.SetUpDB()
 	return db
 }
 
+func notFoundError(err error, c *gin.Context) {
+	if err != nil {
+		log.Println(err.Error())
+		c.JSON(http.StatusNotFound, gin.H{"error ": err.Error()})
+	}
+}
 func checkError(err error, c *gin.Context) {
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"err ": err})
-		panic(err)
+		log.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error ": err.Error()})
 	}
 }
