@@ -18,7 +18,7 @@ import (
 
 func RunServer() {
 	r := gin.Default()
-	api := r.Group("/api")
+	api := r.Group("/api/v1")
 
 	//set db connection
 	_ = db.SetUpDB()
