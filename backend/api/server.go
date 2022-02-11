@@ -11,11 +11,31 @@ import (
 	"time"
 
 	"github.com/chigaji/myfavquotes/backend/db"
+	_ "github.com/chigaji/myfavquotes/backend/docs"
+
+	// _ "../docs"
 	"github.com/chigaji/myfavquotes/backend/model"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title My Favorite Quotes
+// @version 1.0
+// @description This is an API for My favorite quotes
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name Ronald
+// @contact.url brothermen.com
+// @contact.email chigaji@gmail.com
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:4000
+// @BasePath /api/v1
+// @schemes http
 func RunServer() {
 	r := gin.Default()
 	api := r.Group("/api/v1")
@@ -25,7 +45,7 @@ func RunServer() {
 	//api endpoints
 
 	// home
-	api.GET("/", handleHome)
+	api.GET("/home", handleHome)
 
 	// get all quotes of a given type
 	api.GET("/quotes/:type", getQuotes)
@@ -44,6 +64,10 @@ func RunServer() {
 
 	// Delete a quote of a given type by Id
 	api.DELETE("/quotes/:type/:id", deleteQuote)
+
+	// add swagger
+	url := ginSwagger.URL("http://localhost:4000/api/v1/api-docs/doc.json")
+	api.GET("/api-docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	r.NoRoute(func(c *gin.Context) {
 		c.AbortWithStatus(http.StatusNotFound)
