@@ -15,6 +15,7 @@ import (
 
 	// _ "../docs"
 	"github.com/chigaji/myfavquotes/backend/model"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	swaggerFiles "github.com/swaggo/files"
@@ -38,6 +39,11 @@ import (
 // @schemes http
 func RunServer() {
 	r := gin.Default()
+
+	//add cors here
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+	}))
 	api := r.Group("/api/v1")
 
 	//set db connection
