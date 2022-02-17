@@ -53,11 +53,11 @@ func RunServer() {
 	// home
 	api.GET("/home", handleHome)
 
+	// get a random quote of a given type
+	api.GET("/quote/:type", getRandomQuote)
+
 	// get all quotes of a given type
 	api.GET("/quotes/:type", getQuotes)
-
-	// get a random quote of a given type
-	api.GET("/quote/:type/", getRandomQuote)
 
 	// get a quote of given type by id
 	api.GET("/quote/:type/:id", getQuote)
