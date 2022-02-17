@@ -13,7 +13,7 @@
 # create finance quotes
 ###########################################
 
-POST  {{endpoint}}/api/quotes/finance HTTP/1.1
+POST  {{endpoint}}/api/v1/quotes/finance HTTP/1.1
 Content-Type: application/json 
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 ###########################################
 # create love quotes
 ###########################################
-POST  {{endpoint}}/api/quotes/love HTTP/1.1
+POST  {{endpoint}}/api/v1/quotes/love HTTP/1.1
 Content-Type: application/json 
 
 {
@@ -31,19 +31,19 @@ Content-Type: application/json
 }
 
 ###########################################
-# create LIVE quotes
+# create LIFE quotes
 ###########################################
-POST  {{endpoint}}/api/quotes/life HTTP/1.1
+POST  {{endpoint}}/api/v1/quotes/life HTTP/1.1
 Content-Type: application/json 
 
 {
-    "quote": "Doing what needs to be done may not make you happy, but it will make you great."
+    "quote": "You have to choose between the Pain of Dscipline OR the Pain of Regret."
 }
 
 ###########################################
 # create LOVE quotes
 ###########################################
-POST  {{endpoint}}/api/quotes/love HTTP/1.1
+POST  {{endpoint}}/api/v1/quotes/love HTTP/1.1
 Content-Type: application/json 
 
 {
@@ -53,24 +53,24 @@ Content-Type: application/json
 ###########################################
 # create FINANCE quotes
 ###########################################
-POST  {{endpoint}}/api/quotes/finance HTTP/1.1
+POST  {{endpoint}}/api/v1/quotes/finance HTTP/1.1
 Content-Type: application/json 
 
 {
     "quote": "Success if never making the same mistake twice."
 }
 
-###########################################
-# DELETE QUOTE quotes
-###########################################
-DELETE   {{endpoint}}/api/quotes/love/6 HTTP/1.1
-Content-Type: application/json 
+# ###########################################
+# # DELETE QUOTE quotes
+# ###########################################
+# DELETE   {{endpoint}}/api/v1/quotes/life/13 HTTP/1.1
+# Content-Type: application/json 
 
 ###########################################
 # Get All Quotes of a given Type
 ###########################################
 
-GET {{endpoint}}/api/quotes/love HTTP/1.1
+GET {{endpoint}}/api/v1/quotes/LIFE HTTP/1.1
 Content-Type: application/json 
 # Authorization: Bearer {{TOKEN}}
 
@@ -79,7 +79,7 @@ Content-Type: application/json
 # Get ramdom quote of a given type
 ###########################################
 
-GET {{endpoint}}/api/quote/love HTTP/1.1
+GET {{endpoint}}/api/v1/quote/life HTTP/1.1
 Content-Type: application/json 
 # Authorization: Bearer {{TOKEN}}
 
@@ -89,13 +89,13 @@ Content-Type: application/json
 # Get quote of a given type by Id 
 ###########################################
 
-GET {{endpoint}}/api/quote/finance/6 HTTP/1.1
+GET {{endpoint}}/api/v1/quote/finance/6 HTTP/1.1
 Content-Type: application/json 
 # Authorization: Bearer {{TOKEN}}
 
 ###
 
-GET {{endpoint}}/api/quote/life/6 HTTP/1.1
+GET {{endpoint}}/api/v1/quote/life/6 HTTP/1.1
 Content-Type: application/json 
 # Authorization: Bearer {{TOKEN}}
 
@@ -103,9 +103,17 @@ Content-Type: application/json
 ###########################################
 # EDIT QUOTE(:type/:id)
 ###########################################
-PUT {{endpoint}}/api/quotes/life/6 HTTP/1.1
+PUT {{endpoint}}/api/v1/quotes/life/6 HTTP/1.1
 Content-Type: application/json 
 
 {
     "quote": "Success is never making the same mistake twice."
 }
+
+###
+
+###########################################
+# DELETE QUOTE(/quotes/:type/:id)
+###########################################
+DELETE  {{endpoint}}/api/v1/quotes/life/13 HTTP/1.1
+Content-Type: application/json 
