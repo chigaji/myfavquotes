@@ -6,6 +6,12 @@
     "info": {
         "description": "This is an API for My favorite quotes",
         "title": "My Favorite Quotes",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Ronald",
+            "url": "brothermen.com",
+            "email": "chigaji@gmail.com"
+        },
         "license": {
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -22,146 +28,304 @@
         {
           "name": "All Quotes",
           "description": "All the quotes"
-        },
-        {
-          "name": "Financial Quotes",
-          "description": "All About Financial Quotes"
-        },
-        {
-          "name": "Life Quotes",
-          "description": "All About Love Quotes"
-        },
-        {
-          "name": "Love Quotes",
-          "description": "All About Love Quotes"
         }
       ],
-      "paths": {
-        "/home": {
-            "get": {
-              "tags": [
-                "Home"
-              ],
-              "summary": "Home page",
-              "operationId": "homePage",
-              "responses": {
-                "200": {
-                  "description": "success",
-                  "content": {}
-                }
-              }
-            }
-          },
-          "/quotes/{type}": {
-            "get": {
-              "tags": [
-                "All Quotes"
-              ],
-              "summary": "Get all quotes of a given type",
-              "operationId": "getQuotes",
-              "parameters": [
-                {
-                  "name": "type",
-                  "in": "path",
-                  "description": "quote type",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Success",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad Request",
-                  "content": {}
-                },
-                "404": {
-                  "description": "Not found",
-                  "content": {}
-                }
-              }
-            }
-          },
-          "/quote/{type}": {
-            "get": {
-              "tags": [
-                "All Quotes"
-              ],
-              "summary": "get a random quote of a given type",
-              "operationId": "getQuote",
-              "parameters": [
-                {
-                  "name": "type",
-                  "in": "path",
-                  "description": "quote type",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Success",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad Request",
-                  "content": {}
-                },
-                "404": {
-                  "description": "Not found",
-                  "content": {}
-                }
-              }
-            }
-          },
-          "/quote/{type}/{id}": {
-            "get": {
-              "tags": [
-                "All Quotes"
-              ],
-              "summary": "get a quote of a given type by id",
-              "operationId": "getQuoteById",
-              "parameters": [
-                {
-                  "name": "type",
-                  "in": "path",
-                  "description": "quote type",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "name": "id",
-                  "in": "path",
-                  "description": "quote id",
-                  "required": true,
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Success",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad Request",
-                  "content": {}
-                },
-                "404": {
-                  "description": "Not found",
-                  "content": {}
-                }
+    "paths": {
+        "/api/v1/home": {
+          "get": {
+            "tags": [
+              "Home"
+            ],
+            "summary": "Home page",
+            "operationId": "homePage",
+            "responses": {
+              "200": {
+                "description": "success"
               }
             }
           }
-    }
+        },
+        "/api/v1/quotes/{type}": {
+          "post": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "create a quote of a given type",
+            "operationId": "createQuote",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "requestBody": {
+              "description": "create Quote request",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/createQuote"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          },
+          "get": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "Get all quotes of a given type",
+            "operationId": "getQuotes",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          }
+        },
+        "/api/v1/quotes/{type}/{id}": {
+          "put": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "edit a given quote of a type using a given id",
+            "operationId": "editQuotes",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "id",
+                "in": "path",
+                "description": "quote id",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "requestBody": {
+              "description": "Edit Quote request",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/editQuote"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          }
+        },
+        "/api/v1/quote/{type}": {
+          "get": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "get a random quote of a given type",
+            "operationId": "getQuote",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          }
+        },
+        "/api/v1/quote/{type}/{id}": {
+          "get": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "get a quote of a given type by id",
+            "operationId": "getQuoteById",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "id",
+                "in": "path",
+                "description": "quote id",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          },
+          "delete": {
+            "tags": [
+              "All Quotes"
+            ],
+            "summary": "Delete a quote of a given type by Id",
+            "operationId": "deleteQuoteById",
+            "parameters": [
+              {
+                "name": "type",
+                "in": "path",
+                "description": "quote type",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "id",
+                "in": "path",
+                "description": "quote id",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "content": {}
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {}
+              },
+              "404": {
+                "description": "Not found",
+                "content": {}
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "createQuote": {
+            "type": "object",
+            "properties": {
+              "quote": {
+                "type": "string"
+              }
+            },
+            "example": {
+              "quote": "Pain of Discipline OR Pain of Regret"
+            }
+          },
+          "editQuote": {
+            "type": "object",
+            "properties": {
+              "quote": {
+                "type": "string"
+              }
+            },
+            "example": {
+              "quote": "Pain of Discipline OR Pain of Regret"
+            }
+          }
+        },
+        "securitySchemes": {
+          "bearer": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+          }
+        }
+      }
 }
