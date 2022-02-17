@@ -69,7 +69,7 @@ func RunServer() {
 	api.PUT("/quotes/:type/:id", editQuote)
 
 	// Delete a quote of a given type by Id
-	api.DELETE("/quotes/:type/:id", deleteQuote)
+	api.DELETE("/quote/:type/:id", deleteQuote)
 
 	// add swagger
 	url := ginSwagger.URL("http://localhost:4000/api/v1/api-docs/doc.json")
