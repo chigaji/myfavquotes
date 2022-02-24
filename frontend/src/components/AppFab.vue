@@ -34,7 +34,7 @@ export default {
     onScroll () {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || document.documentElement.offsetTop || 0
-      this.fab = top > 300
+      this.fab = top > 100
     },
     toTop () {
       this.$vuetify.goTo(0)
