@@ -1,34 +1,78 @@
 <template lang="">
-<!-- src="../assets/appbar3.jpg" -->
+<div>
  <v-app-bar
-    absolute
-    color="#6A76AB"
-    dark
-    shrink-on-scroll
-    prominent
-    extended
-    src="../assets/cover2.jpeg"
-    fade-img-on-scroll
-    scroll-target="#scrolling-techniques-3"
-    scroll-threshold="200"
+      app
+      color="#2c3e50"
+      darken-4
+      dark
+      prominent
+      extended
+      fade-img-on-scroll
+      shrink-on-scroll
+      src="../assets/dew.jpeg"
     >
     <!-- src="https://picsum.photos/1920/1080?random" -->
-     <!-- src="../assets/cover.png" -->
-    <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-     <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-        ></v-img>
-      </template>
-      <v-spacer></v-spacer>
+    <!-- src="../assets/cover2.jpeg" -->
+    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <!-- <v-spacer></v-spacer> -->
     <v-toolbar-title
-      class="text-center display-1 font-weight-bold white--text text--lighten-4">
-      <router-link to="/" tag="span" style="cursor: pointer">{{appTitle}}</router-link>
-      <!-- <v-icon color="yellow lighten-4">mdi-fingerprint</v-icon> -->
+      class="text-h2 font-weight-bold white--text text--darken-4">
+  
+        <router-link to="/" tag="span" style="cursor: pointer">{{appTitle}}</router-link>
+      <v-btn
+              icon
+              color="white"
+            >
+              <v-icon>mdi-crown-outline</v-icon>
+            </v-btn>
+
     </v-toolbar-title>
-   <v-spacer></v-spacer>
+    <!-- <v-spacer></v-spacer> -->
+  
+    <!-- <Profile v-bind:user="user"/> -->
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          align-with-title
+          slider-color="white"
+          center-active
+          grow
+          show-arrows
+        >
+          <v-tab
+              v-for="item in items"
+              :key="item.tab"
+              @click="handleLink(item.link)"
+            >
+              {{ item.tab }}
+            </v-tab>
+        </v-tabs>
+      </template>
     </v-app-bar>
+    <v-navigation-drawer v-model="drawer"
+    app
+    bottom
+    temporary
+    src="../assets/cloud.jpeg"
+    class="white"
+
+    >
+      <v-list nav dense>
+        <v-list-item
+        v-for="item in items"
+        :key="item.tab"
+        :to="item.link">
+        <v-list-item-icon>
+            <v-icon v-text="item.icon"></v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.tab"></v-list-item-title>
+          <!-- {{item.tab}} -->
+        </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    </div>
 </template>
 <script>
 // import Profile from '@/components/Profile'
@@ -40,38 +84,12 @@ export default {
       appTitle: "MY FAVORITE QUOTES",
       items: [
         { tab: "Home", link: "/", icon: "mdi-home" },
-        { tab: "Sign Up", link: "/register", icon: "mdi-account-plus" },
-        { tab: "Login", link: "/login", icon: "mdi-account-check" },
+        { tab: "Finance Quotes", link: "/finance", icon: "mdi-account-plus" },
+        { tab: "Life Quotes", link: "/life", icon: "mdi-account-check" },
         // { tab: 'Create Asset User', link: '/CreateAssetUser' },
-        { tab: "Create An Asset", link: "/CreateAsset", icon: "mdi-buffer" },
-        {
-          tab: "Query My Assets",
-          link: "/getAssetsByUser",
-          icon: "mdi-clipboard-text-search",
-        },
+        { tab: "Love Quotes", link: "/love", icon: "mdi-bullseye-arrow" },
+        { tab: "Random Quotes", link: "/random", icon: "mdi-history" },
         // { tab: 'Update Asset', link: '/updateAsset' },
-        { tab: "Asset Details", link: "/readAsset", icon: "mdi-library" },
-        {
-          tab: "ChangeAssetOwnership",
-          link: "/changeAssetOwnership",
-          icon: "mdi-share-all",
-        },
-        {
-          tab: "Asset History",
-          link: "/getHistoryForAsset",
-          icon: "mdi-history",
-        },
-        {
-          tab: "Download An Asset",
-          link: "/downloadAsset",
-          icon: "mdi-cloud-download",
-        },
-        {
-          tab: "Verify Timestamp",
-          link: "/verifyAsset",
-          icon: "mdi-fingerprint",
-        },
-        // { tab: 'Delete An Asset', link: '/deleteAsset' }
       ],
       user: {
         initials: "",
