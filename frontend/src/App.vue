@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Appbar />
-    <v-main class="grey lighten-5">
+    <v-main class=" main-content grey lighten-5">
       <!-- page wrapper -->
       <v-fade-transition mode="out-in">
         <div class="page-wrapper"><router-view /></div>
@@ -59,5 +59,5 @@ export default {
 .page-wrapper
   min-height: calc(100vh -112px -48px)
 .main-content
-  margin-top: 100px
+  margin-top: 50px
 </style>
