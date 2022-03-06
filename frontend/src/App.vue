@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <Appbar />
-    <v-main class=" main-content grey lighten-5">
+    <v-main class="main-content grey lighten-5">
       <!-- page wrapper -->
       <v-fade-transition mode="out-in">
         <div class="page-wrapper"><router-view /></div>
       </v-fade-transition>
-      <Home />
+      <!-- <Home /> -->
       <!-- footer here -->
     </v-main>
     <AppFab />
@@ -17,7 +17,7 @@
 <script>
 import AppFab from "@/components/AppFab";
 import Appbar from "@/components/Appbar";
-import Home from "@/components/Home";
+// import Home from "@/components/Home";
 // import Profile from '@/components/Profile'
 import Footer from "@/components/Footer";
 
@@ -27,7 +27,7 @@ export default {
   components: {
     AppFab,
     // Profile,
-    Home,
+    // Home,
     Appbar,
     Footer,
   },
@@ -60,4 +60,5 @@ export default {
   min-height: calc(100vh -112px -48px)
 .main-content
   margin-top: 50px
+  color: #FBF5F5
 </style>
