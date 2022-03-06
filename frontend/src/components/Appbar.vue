@@ -3,35 +3,27 @@
  <v-app-bar
       app
       color="#2c3e50"
-      darken-4
       dark
-      prominent
       extended
       fade-img-on-scroll
-      shrink-on-scroll
       src="../assets/dew.jpeg"
+      elevation="0"
     >
-    <!-- src="https://picsum.photos/1920/1080?random" -->
-    <!-- src="../assets/cover2.jpeg" -->
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    <!-- <v-spacer></v-spacer> -->
-    <v-toolbar-title
-      class="text-h2 font-weight-bold white--text text--darken-4">
-  
-        <router-link to="/" tag="span" style="cursor: pointer">{{appTitle}}</router-link>
-      <v-btn
-              icon
-              color="white"
-            >
-              <v-icon>mdi-crown-outline</v-icon>
-            </v-btn>
-
-    </v-toolbar-title>
-    <!-- <v-spacer></v-spacer> -->
-  
-    <!-- <Profile v-bind:user="user"/> -->
-      <template v-slot:extension>
-        <v-tabs
+  <v-subheader>
+    <router-link to="/" tag="span" style="cursor: pointer">
+      <h1 class="blue--text text-h3 font-weight-bold">Power
+        <span class="pink--text">.Quotes</span>
+      </h1>
+    </router-link>
+    <v-btn
+      icon
+      color="white">
+      <v-icon>mdi-crown-outline</v-icon>
+    </v-btn>
+  </v-subheader>
+   
+  <template v-slot:extension>
+        <v-tabs right
           v-model="tab"
           align-with-title
           slider-color="white"
@@ -47,32 +39,9 @@
               {{ item.tab }}
             </v-tab>
         </v-tabs>
-      </template>
-    </v-app-bar>
-    <v-navigation-drawer v-model="drawer"
-    app
-    bottom
-    temporary
-    src="../assets/cloud.jpeg"
-    class="white"
-
-    >
-      <v-list nav dense>
-        <v-list-item
-        v-for="item in items"
-        :key="item.tab"
-        :to="item.link">
-        <v-list-item-icon>
-            <v-icon v-text="item.icon"></v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.tab"></v-list-item-title>
-          <!-- {{item.tab}} -->
-        </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    </div>
+  </template>
+  </v-app-bar>
+  </div>
 </template>
 <script>
 // import Profile from '@/components/Profile'
@@ -81,14 +50,14 @@ export default {
     return {
       drawer: false,
       tab: null,
-      appTitle: "MY FAVORITE QUOTES",
+      appTitle: "FAVORITE QUOTES",
       items: [
         { tab: "Home", link: "/", icon: "mdi-home" },
         { tab: "Finance Quotes", link: "/finance", icon: "mdi-account-plus" },
         { tab: "Life Quotes", link: "/life", icon: "mdi-account-check" },
         // { tab: 'Create Asset User', link: '/CreateAssetUser' },
         { tab: "Love Quotes", link: "/love", icon: "mdi-bullseye-arrow" },
-        { tab: "Random Quotes", link: "/random", icon: "mdi-history" },
+        // { tab: "Random Quotes", link: "/random", icon: "mdi-history" },
         // { tab: 'Update Asset', link: '/updateAsset' },
       ],
       user: {
