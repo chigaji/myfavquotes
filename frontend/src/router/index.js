@@ -1,14 +1,27 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-// Vue.use(VueRouter)
+import Home from "@/components/Home";
+import Love from "@/components/Love";
+Vue.use(VueRouter);
 
-// export default new VueRouter({
-//     routes: [
-//         // {
-//         //     path: '/',
-//         //     name: 'home',
-//         //     component: Home
-//         // }
-//     ]
-// })
+const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/love",
+    name: "love",
+    component: Love,
+  },
+];
+
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
+});
+
+export default router;
