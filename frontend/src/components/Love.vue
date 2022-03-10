@@ -1,18 +1,18 @@
 <template>
   <v-container fluid>
     <!-- <v-sheet class="main" color="white" min-height="110vh" elevation="2"> -->
-    <v-row dense>
+    <v-row no-gutters>
       <!-- <v-container fluid> -->
-      <v-col fluid>
-        <v-card class="text-center rounded-xl" color="#e1e0e0c9" elevation="6">
-          <v-img height="150px" src="https://picsum.photos/1920/1080?random">
+      <v-col col-6 dense>
+        <v-card class="text-center rounded-xl" elevation="6">
+          <v-img height="150px" src="../assets/stars_bg.jpeg">
             <!-- </v-img> -->
             <v-card-title class="text-h4 font-weight-bold white--text mt-4">
               Love <span class="red--text">.</span> Quotes
             </v-card-title>
           </v-img>
 
-          <v-card-text class="text-h5">
+          <v-card-text class="d-flex justify-center text-h5" >
             <form>
               <span v-if="errorMessage">
                 <!-- <b class="red--text">{{ errorMessage.data }}</b> -->
@@ -22,7 +22,7 @@
                 <v-img
                   max-height="250"
                   max-width="250"
-                  src="../assets/robot.png"
+                  src="../assets/love_bg.jpg"
                 >
                 </v-img>
                 <v-icon large color="pink"

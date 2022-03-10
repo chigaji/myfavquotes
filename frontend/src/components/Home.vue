@@ -35,21 +35,21 @@
       <v-col>
         <v-img
           src="https://picsum.photos/1920/1080?random"
+          elevation="2"
           aspect-ratio="1"
           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          height="438px"
+          height="434px"
         >
         </v-img>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <v-card color="white" elevation="9">
+        <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="https://picsum.photos/1920/1080?random"
+            src="../assets/love_bg_cover.jpg"
             aspect-ratio="1"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            height="200px"
+            height="300px"
           >
             <!-- </v-img> -->
             <v-card-title
@@ -58,16 +58,18 @@
                 headline
                 display-1
                 font-weight-bold
-                black--text
+                white--text
                 text--darken-4
               "
               >LOVE QUOTES
             </v-card-title>
-            <v-card-text class="text-center text-h6">
+            <v-card-text class="text-center white--text text-h6">
+              <br />
+              <br />
               Random love quotes Collection
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn large color="primary mt-8 px-10 py-5" dark
+              <v-btn x-large color="pink mt-12 px-10 py-5" dark
                 ><router-link to="/love" tag="span" style="cursor: pointer"
                   >View Quotes</router-link
                 >
@@ -77,12 +79,11 @@
         </v-card>
       </v-col>
       <v-col>
-        <v-card color="white" elevation="9">
+        <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="https://picsum.photos/1920/1080?random"
+            src="../assets/love_bg_cover.jpg"
             aspect-ratio="1"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            height="200px"
+            height="300px"
           >
             <!-- </v-img> -->
             <v-card-title
@@ -91,27 +92,32 @@
                 headline
                 display-1
                 font-weight-bold
-                black--text
+                white--text
                 text--darken-4
               "
               >LIFE QUOTES
             </v-card-title>
-            <v-card-text class="text-center text-h6">
+            <v-card-text class="text-center white--text text-h6">
+              <br />
+              <br />
               Random life quotes Collection
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn color="primary" dark>View Quotes </v-btn>
+              <v-btn x-large color="pink mt-12 px-10 py-5" dark
+                ><router-link to="/life" tag="span" style="cursor: pointer"
+                  >View Quotes</router-link
+                >
+              </v-btn>
             </v-card-actions>
           </v-img>
         </v-card>
       </v-col>
       <v-col>
-        <v-card color="white" elevation="9">
+        <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="https://picsum.photos/1920/1080?random"
+            src="../assets/love_bg_cover.jpg"
             aspect-ratio="1"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            height="200px"
+            height="300px"
           >
             <!-- </v-img> -->
             <v-card-title
@@ -120,21 +126,26 @@
                 headline
                 display-1
                 font-weight-bold
-                black--text
+                white--text
                 text--darken-4
               "
-              >POWER FINANCIAL QUOTES
+              >FINANCIAL QUOTES
             </v-card-title>
-            <v-card-text class="text-center text-h6">
+            <v-card-text class="text-center white--text text-h6">
+              <br />
+              <br />
               Awesome financial quotes Collection
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn color="primary" dark>View Quotes </v-btn>
+              <v-btn x-large color="pink mt-12 px-10 py-5" dark
+                ><router-link to="/finance" tag="span" style="cursor: pointer"
+                  >View Quotes</router-link
+                >
+              </v-btn>
             </v-card-actions>
           </v-img>
         </v-card>
       </v-col>
-
       <!-- </v-container> -->
     </v-row>
     <!-- </v-sheet> -->
@@ -157,7 +168,7 @@ export default {
         },
         {
           message: "Edit Quotes",
-          color: "deep-purple lighten-1",
+          color: "blue lighten-1",
         },
       ],
     };
