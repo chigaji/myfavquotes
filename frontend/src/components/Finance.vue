@@ -4,8 +4,8 @@
     <v-row no-gutters>
       <!-- <v-container fluid> -->
       <v-col fluid dense>
-        <v-card class=" rounded-xl" elevation="6">
-          <v-img height="150px" src="../assets/stars_bg.jpeg">
+        <v-card class="rounded-xl" elevation="6">
+          <v-img height="150px" src="../assets/money.jpg">
             <!-- </v-img> -->
             <v-card-title class="text-h4 font-weight-bold white--text mt-4">
               Finance <span class="red--text">.</span> Quotes
@@ -20,9 +20,10 @@
               </span>
               <span class="font-weight-bold blue--text" v-if="randomQuote">
                 <v-img
-                  max-height="250"
-                  max-width="250"
-                  src="../assets/love_bg.jpg"
+                  aspect-ratio="1"
+                  width="200"
+                  height="300"
+                  src="../assets/robot.png"
                 >
                 </v-img>
                 <v-icon large color="pink"
@@ -35,28 +36,37 @@
               </span>
               <!-- get random quotes here  -->
               <span class="font-weight-bold blue--text" v-if="quotes">
-                <v-img
-                  max-height="250"
-                  max-width="250"
-                  src="../assets/love_bg.jpg"
-                >
-                </v-img>
                 <ol>
                   <li v-for="quote in quotes" :key="quote.id">
                     {{ quote.quote }}
-                    <br/>
-                    <br>
+                    <br />
+                    <br />
                   </li>
                 </ol>
               </span>
-              <br>
-              <v-btn x-large color="pink mt-12 px-10 py-5" dark @click="getAllQuotes">Get All Quotes</v-btn>
             </form>
           </v-card-text>
-          <!-- </v-img> -->
+          <v-card-actions class="justify-center">
+            <div class="my-2">
+              <v-btn
+                x-large
+                outlined
+                rounded
+                color="pink mt-12 px-10 py-5"
+                dark
+                @click="getAllQuotes"
+              >
+                Get All Quotes
+              </v-btn>
+            </div>
+            <div class="my-2">
+             <Dialog class="ml-3" />
+            </div>
+            
+          </v-card-actions>
+          
         </v-card>
       </v-col>
-      <!-- </v-container> -->
     </v-row>
     <!-- </v-sheet> -->
   </v-container>
@@ -64,6 +74,7 @@
 
 <script>
 import PostsService from "@/services/apiService";
+import Dialog from "@/components/Dialog";
 export default {
   name: "Home",
   data() {
@@ -85,7 +96,7 @@ export default {
         this.quotes = resp.data;
         console.log(resp.data);
 
-        this.randomQuote = ""
+        this.randomQuote = "";
         this.quoteType = "";
       } catch (error) {
         this.errorMessage = error;
@@ -103,13 +114,16 @@ export default {
         this.randomQuote = resp.data;
         console.log(resp.data);
         this.quoteType = "";
-        this.quotes = ""
+        this.quotes = "";
       } catch (error) {
         this.errorMessage = error;
         this.randomQuote = "";
         console.log(error);
       }
     },
+  },
+  components: {
+    Dialog,
   },
   beforeMount() {
     this.getRandomQuote();

@@ -34,10 +34,9 @@
       </v-col>
       <v-col>
         <v-img
-          src="https://picsum.photos/1920/1080?random"
+          src="../assets/life_main.jpg"
           elevation="2"
           aspect-ratio="1"
-          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
           height="434px"
         >
         </v-img>
@@ -47,8 +46,9 @@
       <v-col>
         <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="../assets/love_bg_cover.jpg"
+            src="../assets/love_main.png"
             aspect-ratio="1"
+            width="150px"
             height="300px"
           >
             <!-- </v-img> -->
@@ -58,8 +58,8 @@
                 headline
                 display-1
                 font-weight-bold
-                white--text
-                text--darken-4
+                yellow--text
+                text--lighten-1
               "
               >LOVE QUOTES
             </v-card-title>
@@ -71,7 +71,7 @@
             <v-card-actions class="justify-center">
               <v-btn x-large color="pink mt-12 px-10 py-5" dark
                 ><router-link to="/love" tag="span" style="cursor: pointer"
-                  >View Quotes</router-link
+                  >View Love Quotes</router-link
                 >
               </v-btn>
             </v-card-actions>
@@ -81,7 +81,7 @@
       <v-col>
         <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="../assets/love_bg_cover.jpg"
+            src="../assets/life_main1.jpeg"
             aspect-ratio="1"
             height="300px"
           >
@@ -92,20 +92,20 @@
                 headline
                 display-1
                 font-weight-bold
-                white--text
+                orange--text
                 text--darken-4
               "
               >LIFE QUOTES
             </v-card-title>
-            <v-card-text class="text-center white--text text-h6">
+            <v-card-text class="text-center font-weight-bold orange--text text--darken-4 text-h6">
               <br />
               <br />
               Random life quotes Collection
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn x-large color="pink mt-12 px-10 py-5" dark
+              <v-btn x-large color="orange mt-12 px-10 py-5" dark
                 ><router-link to="/life" tag="span" style="cursor: pointer"
-                  >View Quotes</router-link
+                  >View Life Quotes</router-link
                 >
               </v-btn>
             </v-card-actions>
@@ -115,7 +115,7 @@
       <v-col>
         <v-card class="d-flex justify-center" color="white" elevation="9">
           <v-img
-            src="../assets/love_bg_cover.jpg"
+            src="../assets/money.jpg"
             aspect-ratio="1"
             height="300px"
           >
@@ -129,17 +129,17 @@
                 white--text
                 text--darken-4
               "
-              >FINANCIAL QUOTES
+              >FINANCE QUOTES
             </v-card-title>
-            <v-card-text class="text-center white--text text-h6">
+            <v-card-text class="text-center font-weight-bold white--text text-h6">
               <br />
               <br />
               Awesome financial quotes Collection
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-btn x-large color="pink mt-12 px-10 py-5" dark
+              <v-btn x-large color="green mt-12 px-10 py-5" dark
                 ><router-link to="/finance" tag="span" style="cursor: pointer"
-                  >View Quotes</router-link
+                  >View Finace Quotes</router-link
                 >
               </v-btn>
             </v-card-actions>

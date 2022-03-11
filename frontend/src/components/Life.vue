@@ -5,7 +5,7 @@
       <!-- <v-container fluid> -->
       <v-col col-6 dense>
         <v-card class="text-center rounded-xl" elevation="6">
-          <v-img height="150px" src="../assets/stars_bg.jpeg">
+          <v-img height="150px" src="../assets/life_main1.jpeg">
             <!-- </v-img> -->
             <v-card-title class="text-h4 font-weight-bold white--text mt-4">
               Life <span class="red--text">.</span> Quotes
@@ -22,7 +22,7 @@
                 <v-img
                   max-height="250"
                   max-width="250"
-                  src="../assets/love_bg.jpg"
+                  src="../assets/life_main.jpg"
                 >
                 </v-img>
                 <v-icon large color="pink"
