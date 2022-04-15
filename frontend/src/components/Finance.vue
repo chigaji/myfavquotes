@@ -47,6 +47,7 @@
             </form>
           </v-card-text>
           <v-card-actions class="justify-center">
+            <v-spacer></v-spacer>
             <div class="my-2">
               <v-btn
                 x-large
@@ -56,13 +57,14 @@
                 dark
                 @click="getAllQuotes"
               >
-                Get All Quotes
+                All Quotes
               </v-btn>
             </div>
+            <v-spacer></v-spacer>
             <div class="my-2">
-             <Dialog class="ml-3" />
+             <Dialog class="ml-3" :rQuote="quoteToSend" @quoteCreated="handleCreated"/>
             </div>
-            
+            <v-spacer></v-spacer>
           </v-card-actions>
           
         </v-card>
@@ -80,6 +82,7 @@ export default {
   data() {
     return {
       quotes: [],
+      quoteToSend: {},
       randomQuote: "",
       errorMessage: "",
       quoteType: "",
@@ -113,6 +116,7 @@ export default {
         const resp = await PostsService.getRandomQuote(this.quoteType);
         this.randomQuote = resp.data;
         console.log(resp.data);
+        this.quoteToSend = resp.data
         this.quoteType = "";
         this.quotes = "";
       } catch (error) {
@@ -121,12 +125,17 @@ export default {
         console.log(error);
       }
     },
+    handleCreated(value){
+      console.log("received child created:")
+      console.log("value=>", value)
+    }
   },
   components: {
     Dialog,
   },
   beforeMount() {
     this.getRandomQuote();
+    this.errorMessage = "" 
   },
 };
 </script>
